@@ -34,7 +34,7 @@ public class UserController {
 
     @GetMapping("/api/users/{id}")
     public User getUserById(@PathVariable Integer id) {
-        User returnUser = repository.getReferenceById(id);
+        User returnUser = repository.getById(id);
         List<Post> postList = returnUser.getPosts();
         for (Post p : postList) {
             p.setVoteCount(voteRepository.countVotesByPostId(p.getId()));
@@ -53,7 +53,7 @@ public class UserController {
 
     @PutMapping("/api/users/{id}")
     public User updateUser(@PathVariable int id, @RequestBody User user) {
-        User tempUser = repository.getReferenceById(id);
+        User tempUser = repository.getById(id);
 
         if (!tempUser.equals(null)) {
             user.setId(tempUser.getId());
